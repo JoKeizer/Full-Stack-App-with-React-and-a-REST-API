@@ -84,24 +84,24 @@ export default class Data {
       throw new Error();
     }
   }
+
   // createCourse is used to Create a Course
-  async createCourse(course, username, password) {
-    const response = await this.api(`/courses/`, "POST", course, true, {
-      username,
-      password
-    });
-    console.log(response);
-    if (response.status === 201) {
-      return [];
-    } else if (response.status === 400) {
-      return response.json().then(data => {
-        console.log(data);
-        return data.message;
-      });
-    } else {
-      throw new Error();
-    }
+ async createCourse (emailAddress, password, course) {
+  console.log(emailAddress, password, "hey")
+  const response = await this.api('/courses', 'POST', course, true, {emailAddress, password});
+  if (response.status === 201) {
+    return [];
   }
+  else if (response.status === 400) {
+    return response.json().then(data => {
+      return data.errors;
+    });
+  }
+  else {
+    throw new Error();
+  }
+}
+
   // updateCourse is used to Update a Course
   async updateCourse(course, username, password) {
     const response = await this.api(
