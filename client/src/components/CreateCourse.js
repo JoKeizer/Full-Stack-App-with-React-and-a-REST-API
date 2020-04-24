@@ -106,7 +106,7 @@ submit = () => {
       description,
       estimatedTime,
       materialsNeeded,
-    //   userId: context.authenticatedUser.id
+      userId: context.authenticatedUser.id
   }
 
     context.data.createCourse(emailAddress, password, course)
