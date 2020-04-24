@@ -12,6 +12,8 @@ import UserSignIn from "./components/UserSignIn";
 import UserSignOut from "./components/UserSignOut";
 import UserSignUp from "./components/UserSignUp";
 
+import Courses from './components/Courses';
+
 // Initialize a variable named UserSignUpWithContext. Set the value to call withContext(UserSignUp):
 import withContext from "./Context";
 
@@ -27,11 +29,9 @@ export default () => (
   <Router>
     <HeaderWithContext />
     <div>
-      {/* 
-        The Routes for the Project. 
-      */}
       <Switch>
-   
+      <Route exact path="/" component={Courses} />
+
         <PrivateRoute path="/authenticated" component={AuthWithContext} />
         <Route path="/signin" component={UserSignInWithContext} />
         <Route path="/signup" component={UserSignUpWithContext} />
