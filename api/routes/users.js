@@ -76,7 +76,8 @@ const authenticateUser = async (req, res, next) => {
       
     res.status(200).json({
         name: `${user.firstName} ${user.lastName}`,
-        email: `${user.emailAddress}`
+        email: `${user.emailAddress}`,
+        id: `${user.id}`
     })
   }));
 
