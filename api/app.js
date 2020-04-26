@@ -7,8 +7,8 @@ const morgan = require('morgan');
 const userRouter = require('./routes/users');
 const courseRouter = require('./routes/courses');
 
-const cors = require('cors')
-
+//Cors connect localhost 3000 to localhost 5000
+const cors = require('cors');
 
 // Sequelize
 const { sequelize } = require('./models');
@@ -30,7 +30,8 @@ const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'tr
 const app = express();
 app.use(express.json());
 
-app.use(cors())
+// Enable All CORS Requests
+app.use(cors());
 
 
 // setup morgan which gives us http request logging
