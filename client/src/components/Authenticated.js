@@ -8,9 +8,9 @@ export default ({ context }) => {
     <div className="bounds">
       <div className="grid-100">
         <h1>
-          {authUser.firstName} {authUser.lastName} is authenticated!
+          {authUser.name}is authenticated!
         </h1>
-        <p>Your Email is {authUser.emailAddress}.</p>
+        <p>Your Email is {authUser.email}.</p>
       </div>
     </div>
   );

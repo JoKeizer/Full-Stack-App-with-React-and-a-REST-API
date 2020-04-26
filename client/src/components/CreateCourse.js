@@ -8,6 +8,7 @@ export default class CreateCourses extends Component {
     estimatedTime: '', 
     materialsNeeded: '',
     errors: [],
+    userId: '',
     context: this.props.context,
     
   }
@@ -39,9 +40,12 @@ export default class CreateCourses extends Component {
       context
     } = this.state;
 
+    console.log(this.state.context)
+
+
     return (
       <div className="bounds course--detail">
-        <h1>Create Course</h1>
+        <h1>Create Course test</h1>
         <div>
           <ErrorsDisplay errors={errors} />
           <form onSubmit={this.handleSubmit}>
@@ -49,7 +53,7 @@ export default class CreateCourses extends Component {
               <div className="course--header">
                 <h4 className="course--label">Course</h4>
                 <div><input id="title" name="title" type="text" className="input-title course--title--input" onChange={this.change} placeholder="Course title..." defaultValue={title} /></div>
-                <p>By {`${context.authenticatedUser.firstName} ${context.authenticatedUser.lastName}`}</p>
+                <p>By {`${context.authenticatedUser.name}`}</p>
               </div>
               <div className="course--description">
                 <div><textarea id="description" name="description" className="" onChange={this.change} placeholder="Course description..."></textarea></div>
@@ -96,9 +100,9 @@ export default class CreateCourses extends Component {
 */
 submit = () => {
     const { title, description, estimatedTime, materialsNeeded, context} = this.state;
-    const { emailAddress, password } = context.authenticatedUser;
+    const { email, password} = context.authenticatedUser;
 
-    console.log('emailAddress', emailAddress)
+    console.log('email', email)
     console.log('title', title)
 
     const course = {
@@ -109,7 +113,10 @@ submit = () => {
       userId: context.authenticatedUser.id
   }
 
-    context.data.createCourse(emailAddress, password, course)
+  console.log('userId', course.userId)
+
+
+    context.data.createCourse(email, password, course)
      .then( errors => {
       if (errors.length) {
           this.setState({errors});

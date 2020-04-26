@@ -2,9 +2,10 @@ import React,{Component} from 'react';
 import CourseItem from './CourseItem';
 import {NavLink} from 'react-router-dom';
 class Courses extends Component {
-
+    
     state = {
-        courses: []
+        courses: [],
+    
     }
 
     // fetch from api route
@@ -26,6 +27,8 @@ class Courses extends Component {
     }
 
     render(){
+        // const authUser = context.authenticatedUser;
+
         return(
             <div className="bounds">
                 {this.getAllCourses()}

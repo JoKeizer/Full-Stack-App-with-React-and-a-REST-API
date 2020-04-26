@@ -107,7 +107,7 @@ export default class UserSignUp extends Component {
       emailAddress,
       password
     };
-    console.log(user);
+    console.log("SUBMIT SIGNUP", user);
     if (confirmPassword !== password) {
       this.setState(() => {
         return {

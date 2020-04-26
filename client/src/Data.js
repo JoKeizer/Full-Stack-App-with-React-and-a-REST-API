@@ -17,7 +17,7 @@ export default class Data {
     }
 
     if (requiresAuth) {
-      const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
+      const encodedCredentials = btoa(`${credentials.email}:${credentials.password}`);
       options.headers['Authorization'] = `Basic ${encodedCredentials}`;
     }
 
@@ -26,12 +26,14 @@ export default class Data {
 
   /**
   * makes API request to obtain authenicated user data.
-  * @param {string} emailAddress - Provided input from user
+  * @param {string} email - Provided input from user
   * @param {string} password - Provided input from user
   * @returns {string} User Data
   */
-  async getUser(emailAddress, password) {
-    const response = await this.api(`/users`, 'GET', null, true, {emailAddress, password});
+  async getUser(email, password, id) {
+    const response = await this.api(`/users`, 'GET', null, true, {email, password, id});
+    console.log("getUser", email, password, id  )
+
     if (response.status === 200) {
       return response.json().then(data => data);
     }
@@ -48,6 +50,7 @@ export default class Data {
   * @param {object} user - User Data to be submitted
   */
   async createUser(user) {
+    console.log(user, "post create user")
     const response = await this.api('/users', 'POST', user);
     if (response.status === 201) {
       return [];
@@ -65,12 +68,12 @@ export default class Data {
   /**
   * Sends POST API request to create course
   * @param {object} course - Course Data to be submitted
-  * @param {string } emailAddress - Provided input from user
+  * @param {string } email - Provided input from user
   * @param {string} course - Provided input from user
   */
-  async createCourse (emailAddress, password, course) {
-    console.log(emailAddress, password, "hey")
-    const response = await this.api('/courses', 'POST', course, true, {emailAddress, password});
+  async createCourse (email, password, course,) {
+  
+    const response = await this.api('/courses', 'POST', course, true, {email, password});
     if (response.status === 201) {
       return [];
     }
@@ -87,12 +90,12 @@ export default class Data {
   /**
   * Sends PUT API request to uodate course
   * @param {object} course - Course Data to be submitted
-  * @param {string} emailAddress - Provided input from user
+  * @param {string} email - Provided input from user
   * @param {string} password - Provided input from user
   * @param {string} path - path of course that needs updated
   */
-  async updateCourse (emailAddress, password, course, path) {
-    const response = await this.api(path, 'PUT', course, true, {emailAddress, password});
+  async updateCourse (email, password, course, path, ) {
+    const response = await this.api(path, 'PUT', course, true, {email, password,});
     if (response.status === 204) {
       return [];
     }
@@ -109,11 +112,11 @@ export default class Data {
   /**
   * Sends DELETE API request to delete course
   * @param {object} password - Provided input from user
-  * @param {string} emailAddress - Provided input from user
+  * @param {string} email - Provided input from user
   * @param {string} path - path of course that needs deleted
   */
-  async deleteCourse (emailAddress, password, path) {
-    const response = await this.api(path, 'DELETE', null, true, {emailAddress, password});
+  async deleteCourse (email, password, path) {
+    const response = await this.api(path, 'DELETE', null, true, {email, password});
     if (response.status === 204) {
       return [];
     }
