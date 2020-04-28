@@ -12,13 +12,14 @@ export default class CourseDetail extends Component {
         user: [],
         errors:[], 
         loaded: false,
-        authenticatedUser: []
+        authenticatedUser: [],
+        context: this.props.context,
+
       };
   
     }
   
     componentDidMount(){
-
         /**
         * Fetches a specific course's data
         */
@@ -35,7 +36,10 @@ export default class CourseDetail extends Component {
                 this.setState({
                     user: data.User
                 })
+                return data.User
             })
+
+
     }
 
     /**
@@ -78,11 +82,11 @@ export default class CourseDetail extends Component {
     }
 
     render() {
+
         /**
         * Checks if page exists
         */
         if (this.state.loaded) {
-            console.log("state.course:", this.state.course)
             if (!this.state.course.id) {
                 window.location.replace('/notfound')
             }
@@ -95,7 +99,9 @@ export default class CourseDetail extends Component {
         let buttons;
 
         if (this.props.context.authenticatedUser) {
-            if (this.props.context.authenticatedUser.id === 3) {
+            console.log("authenticatedUser id",this.props.context.authenticatedUser.id)
+            console.log("course id", this.state.course.userId)
+            if (this.props.context.authenticatedUser.id == this.state.course.userId) {
                 buttons = (           
                 <div className="grid-100"><span><Link className="button" to={`/courses/${this.state.params.id}/update`}>Update Course</Link><button onClick={this.handleSubmit} className="button" >Delete Course</button></span><Link
                 className="button button-secondary" to="/">Return to List</Link></div>);
@@ -125,7 +131,7 @@ export default class CourseDetail extends Component {
             <div className="course--header">
                 <h4 className="course--label">Course</h4>
                 <h3 className="course--title">{this.state.course.title}</h3>
-                <p>By {`${this.state.authenticatedUser.name} `}</p>
+                <p>By {`${this.state.course.userId}`}</p>
             </div>
             <div className="course--description">
                 <ReactMarkdown source={this.state.course.description} /> 
