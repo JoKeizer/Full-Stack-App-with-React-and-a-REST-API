@@ -113,9 +113,14 @@ router.post("/",[
         } else {
             const course = await Course.create(req.body);
             // get new course id for Location header
+            
             const id = course.id;
             // Set the status to 201 Created, set Location header, and end the response.
-            res.location(`/api/courses/${id}`).status(201).end();
+            res.location(`/api/courses/${id}`).status(201).json({
+                course
+            }).end();
+
+    
 
         }
     } catch (error) {

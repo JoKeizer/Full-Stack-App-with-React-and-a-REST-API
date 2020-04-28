@@ -11,7 +11,8 @@ export default class CourseDetail extends Component {
         params: props.match.params,
         user: [],
         errors:[], 
-        loaded: false
+        loaded: false,
+        authenticatedUser: []
       };
   
     }
@@ -81,6 +82,7 @@ export default class CourseDetail extends Component {
         * Checks if page exists
         */
         if (this.state.loaded) {
+            console.log("state.course:", this.state.course)
             if (!this.state.course.id) {
                 window.location.replace('/notfound')
             }
@@ -91,8 +93,9 @@ export default class CourseDetail extends Component {
         */
         const { errors } = this.state;
         let buttons;
+
         if (this.props.context.authenticatedUser) {
-            if (this.props.context.authenticatedUser.id === this.state.user.id) {
+            if (this.props.context.authenticatedUser.id === 3) {
                 buttons = (           
                 <div className="grid-100"><span><Link className="button" to={`/courses/${this.state.params.id}/update`}>Update Course</Link><button onClick={this.handleSubmit} className="button" >Delete Course</button></span><Link
                 className="button button-secondary" to="/">Return to List</Link></div>);
@@ -122,7 +125,7 @@ export default class CourseDetail extends Component {
             <div className="course--header">
                 <h4 className="course--label">Course</h4>
                 <h3 className="course--title">{this.state.course.title}</h3>
-                <p>By {`${this.state.user.firstName} ${this.state.user.lastName}`}</p>
+                <p>By {`${this.state.authenticatedUser.name} `}</p>
             </div>
             <div className="course--description">
                 <ReactMarkdown source={this.state.course.description} /> 
