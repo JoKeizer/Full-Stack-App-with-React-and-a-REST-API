@@ -47,11 +47,16 @@ export default class CourseDetail extends Component {
     */
     submit = () => {
         const { context } = this.props;
-        const { emailAddress, password } = context.authenticatedUser;
+        const { email, password } = context.authenticatedUser;
+        console.log(this.state.params.id, "params")
+        console.log("auth ID", context.authenticatedUser.id )
+        console.log("course id", this.state.course.userId)
         const path = `/courses/${this.state.params.id}`;
 
-        if (context.authenticatedUser.id === this.state.user.id) {
-          context.data.deleteCourse(emailAddress, password, path )
+        if (context.authenticatedUser.id == this.state.course.userId) {
+        console.log("IF RUNNING")
+        console.log("email", email)
+          context.data.deleteCourse(email, password, path )
           .then( errors => {
             if (errors.length) {
                 this.setState({errors});
@@ -99,12 +104,14 @@ export default class CourseDetail extends Component {
         let buttons;
 
         if (this.props.context.authenticatedUser) {
-            console.log("authenticatedUser id",this.props.context.authenticatedUser.id)
-            console.log("course id", this.state.course.userId)
+    
             if (this.props.context.authenticatedUser.id == this.state.course.userId) {
                 buttons = (           
-                <div className="grid-100"><span><Link className="button" to={`/courses/${this.state.params.id}/update`}>Update Course</Link><button onClick={this.handleSubmit} className="button" >Delete Course</button></span><Link
-                className="button button-secondary" to="/">Return to List</Link></div>);
+                <div className="grid-100"><span>
+                    <Link className="button" to={`/courses/${this.state.course.userId}/update`}>Update Course</Link>
+                    <button onClick={this.handleSubmit} className="button" >Delete Course</button>
+                   </span>
+                    <Link className="button button-secondary" to="/">Return to List</Link></div>);
             } else {
                 buttons = (
                     <div className="grid-100"><Link

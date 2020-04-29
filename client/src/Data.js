@@ -95,6 +95,7 @@ export default class Data {
   * @param {string} password - Provided input from user
   * @param {string} path - path of course that needs updated
   */
+ 
   async updateCourse (email, password, course, path, ) {
     const response = await this.api(path, 'PUT', course, true, {email, password,});
     if (response.status === 204) {
@@ -116,7 +117,7 @@ export default class Data {
   * @param {string} email - Provided input from user
   * @param {string} path - path of course that needs deleted
   */
-  async deleteCourse (email, password, path) {
+  async deleteCourse ( email, password, path) {
     const response = await this.api(path, 'DELETE', null, true, {email, password});
     if (response.status === 204) {
       return [];
@@ -131,3 +132,4 @@ export default class Data {
     }
   }
 }
+
