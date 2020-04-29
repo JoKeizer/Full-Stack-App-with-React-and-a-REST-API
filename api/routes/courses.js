@@ -120,7 +120,11 @@ router.post("/",[
                 course
             }).end();
 
-    
+            res.status(200).json({
+                name: `${user.firstName} ${user.lastName}`,
+                email: `${user.emailAddress}`,
+                id: `${user.id}`
+            })
 
         }
     } catch (error) {

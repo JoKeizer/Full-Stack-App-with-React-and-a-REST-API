@@ -23,25 +23,25 @@ export default class CourseDetail extends Component {
         // Fetches a specific course's data
         fetch(`http://localhost:5000/api/courses/${this.state.params.id}`)
             .then( response => response.json())
+        
             .then( responseData => {
+                console.log("responseData",responseData)
+
                 this.setState({ 
                 course: responseData,
-                loaded: true
+                loaded: true,
+                user: responseData.creator
+
             });
             return responseData
             })
-            .then( data => {
-                this.setState({
-                    user: data.User
-                })
-                return data.User
-            })
-
+        
 
     }
 
     // Checks whether user is authorized to update and/or delete course content
     submit = () => {
+
         const { context } = this.props;
         const { email, password } = context.authenticatedUser;
     
@@ -90,8 +90,9 @@ export default class CourseDetail extends Component {
         let buttons;
 
         if (this.props.context.authenticatedUser) {
-    
-            if (this.props.context.authenticatedUser.id == this.state.course.userId) {
+
+            if (this.props.context.authenticatedUser.id == this.state.user.id) {
+                console.log("IF STATEMENT RUNNING")
                 buttons = (           
                 <div className="grid-100"><span>
                     <Link className="button" to={`/courses/${this.state.params.id}/update`}>Update Course</Link>

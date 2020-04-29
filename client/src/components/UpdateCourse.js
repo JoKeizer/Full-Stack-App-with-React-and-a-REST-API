@@ -14,6 +14,7 @@ export default class UpdateCourse extends Component {
           user: [],
           context: this.props.context,
           errors: [],
+          user: [],
           loaded: false
         };
         this.change = this.change.bind(this);
@@ -31,15 +32,13 @@ export default class UpdateCourse extends Component {
                   estimatedTime: responseData.estimatedTime,
                   materialsNeeded: responseData.materialsNeeded,
                   course_id: responseData.id,
-                  loaded: true
+                  loaded: true,
+                  user: responseData.creator
+
               });
               return responseData
               })
-              .then( data => {
-                  this.setState({
-                      user: data.User
-                  })
-              })
+    
       }
   
     // Handles the submit functionality for when user submits updated info.
@@ -125,6 +124,7 @@ export default class UpdateCourse extends Component {
 
 // Sends updated request and checks for errors
   submit = () => {
+    console.log("running?????????")
     const { context } = this.props;
     const { title, description, estimatedTime, materialsNeeded, course_id} = this.state
     const { email, password } = context.authenticatedUser;
@@ -137,7 +137,7 @@ export default class UpdateCourse extends Component {
     }
     const path = `/courses/${this.state.course_id}`;
 
-    if (context.authenticatedUser.id == course_id) {
+    if (context.authenticatedUser.id == this.state.user.id) {
 
       context.data.updateCourse(email, password, course, path )
       .then( errors => {
@@ -145,7 +145,7 @@ export default class UpdateCourse extends Component {
         if (errors.length) {
             this.setState({errors});
           } else {
-              this.props.history.push(`/courses/${course_id}`);
+              this.props.history.push(`/courses/${this.state.course_id}`);
           }
       })
       .catch( err => {
