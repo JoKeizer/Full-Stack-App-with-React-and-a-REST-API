@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 //Header Component lets a User Create an Account, or Sign In and Sign Out
-
 export default ({ context }) => {
   const authUser = context.authenticatedUser;
 
@@ -14,7 +13,7 @@ export default ({ context }) => {
           {authUser ? (
             <React.Fragment>
               <span>
-                Welcome, {authUser.firstName} {authUser.lastName}!
+                Welcome, {authUser.name}!
               </span>
               <Link to="/signout">Sign Out</Link>
             </React.Fragment>

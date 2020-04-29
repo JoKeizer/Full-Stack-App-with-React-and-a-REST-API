@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 
-//props course from Courses.js
+// props course from Courses.js
 const CourseItem = ({course}) => {
     return(
         <div className="grid-33">

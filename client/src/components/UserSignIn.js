@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Form from "./Form";
 
-//This Component Signs In a User who already has an exisiting Email Address
-
+// This Component Signs In a User who already has an exisiting Email Address
 export default class UserSignIn extends Component {
   state = {
     email: "",
@@ -65,8 +64,7 @@ export default class UserSignIn extends Component {
   };
 
   // submit handles the submitting of the Form and Handles any Errors
-  //destructuring props and state
-
+  // destructuring props and state
   submit = () => {
     const { context } = this.props;
     const { from } = this.props.location.state || {
@@ -74,10 +72,9 @@ export default class UserSignIn extends Component {
     };
     const { email, password } = this.state;
 
-    //Call the signIn() function, which you can access via the destructured context variable. 
+    // Call the signIn() function, which you can access via the destructured context variable. 
     // In Context.js, you passed Context.Provider a value prop whose value was an object with an actions property. 
     // The signIn() function provided to the UserSignIn component is available via context.actions.signIn:
-
     context.actions
       .signIn(email, password)
       .then(user => {
@@ -96,8 +93,7 @@ export default class UserSignIn extends Component {
       });
   };
 
-    //To accomplish the redirect, we'll once again use history. In the body of the cancel function push the root path ('/') onto the history stack:
-
+    // To accomplish the redirect, we'll once again use history. In the body of the cancel function push the root path ('/') onto the history stack:
   cancel = () => {
     this.props.history.push("/");
   };

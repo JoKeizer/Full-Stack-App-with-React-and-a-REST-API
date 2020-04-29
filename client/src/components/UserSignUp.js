@@ -87,8 +87,7 @@ export default class UserSignUp extends Component {
     });
   };
 
-//Destructure props we take context from props and firstName, lastName emailAddress and password from state. 
-
+// Destructure props we take context from props and firstName, lastName emailAddress and password from state. 
   submit = () => {
     const { context } = this.props;
     const {
@@ -99,7 +98,7 @@ export default class UserSignUp extends Component {
       confirmPassword
     } = this.state;
 
-    //Initialize a variable named user to an object whose properties are name, user and password:
+    // Initialize a variable named user to an object whose properties are name, user and password:
     // New user payload
     const user = {
       firstName,
@@ -107,16 +106,31 @@ export default class UserSignUp extends Component {
       emailAddress,
       password
     };
-    console.log("SUBMIT SIGNUP", user);
+    
     if (confirmPassword !== password) {
       this.setState(() => {
         return {
           errors: ["Password Does Not Match Confirm Password"]
         };
       });
-    } else {
+   
+    } else if(firstName === '' || lastName === ''){
+      this.setState(() => {
+        return {
+          errors: ["What is your name?"]
+        };
+      });
+    }  
+      else if(password === '') {
+          this.setState(() => {
+        return {
+          errors: ["Password can't be empty"]
+        };
+      });
+
+    }else {
     
-    //To create a new user, call the createUser() method, which you can access via the destructured context variable. 
+    // To create a new user, call the createUser() method, which you can access via the destructured context variable. 
     // Context itself is an object which currently has only one property, data. Earlier, in Context.js, 
     // you passed Context.Provider a value prop whose value was an object with a data property. 
     // The authentication API utilities provided to app are available via the context.data property.
@@ -135,7 +149,7 @@ export default class UserSignUp extends Component {
             });
           }
         })
-        //A catch() method chained to the promise sequence handles a rejected promise returned by createUser(). For example, if there's an issue with the /users endpoint, 
+        // A catch() method chained to the promise sequence handles a rejected promise returned by createUser(). For example, if there's an issue with the /users endpoint, 
         // the API is down, or there's a network connectivity issue, the function passed to catch() will get called.
         .catch(err => {
           console.log(err);

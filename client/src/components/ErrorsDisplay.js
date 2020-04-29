@@ -1,9 +1,6 @@
 import React from 'react';
 
-/**
- * Renders the HTML for errors
- * @param {props} Errors - validation errors 
- */
+// Renders the HTML for errors
 function ErrorsDisplay(props) {
     let errorsDisplay = null;
     const errors = props.errors;

@@ -14,19 +14,13 @@ export default class CreateCourses extends Component {
   }
 
 
-  /**
-  * Handles the click functionality for when user hits cancel.
-  * @param {event} Click - when user clicks button to cancel. 
-  */
+// Handles the click functionality for when user hits cancel.
   handleClick = e => {
       e.preventDefault();
       this.props.history.push('/');
   }
 
-  /**
-  * Handles the submit functionality for when user submits new course info.
-  * @param {event} Submit - when user submits new data request. 
-  */
+// Handles the submit functionality for when user submits new course info.
   handleSubmit = (e) => {
       e.preventDefault();
       this.submit();
@@ -39,9 +33,6 @@ export default class CreateCourses extends Component {
       errors,
       context
     } = this.state;
-
-    console.log(this.state.context)
-
 
     return (
       <div className="bounds course--detail">
@@ -80,10 +71,7 @@ export default class CreateCourses extends Component {
     );
   }
 
-  /**
-  * Sets and changes state when user updates input fields.
-  * @param {event} change - input fields. 
-  */
+// Sets and changes state when user updates input fields.
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -95,9 +83,7 @@ export default class CreateCourses extends Component {
     });
 }
 
-/**
-* Sends new course data and checks for errors
-*/
+// Sends new course data and checks for errors 
 submit = () => {
     const { title, description, estimatedTime, materialsNeeded, context} = this.state;
     const { email, password} = context.authenticatedUser;
@@ -112,9 +98,6 @@ submit = () => {
       materialsNeeded,
       userId: context.authenticatedUser.id
   }
-
-  console.log('userId', course.userId)
-
 
     context.data.createCourse(email, password, course)
      .then( errors => {

@@ -28,7 +28,6 @@ class Courses extends Component {
 
     render(){
         // const authUser = context.authenticatedUser;
-
         return(
             <div className="bounds">
                 {this.getAllCourses()}

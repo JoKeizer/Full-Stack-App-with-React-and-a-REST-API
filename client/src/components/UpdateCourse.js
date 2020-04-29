@@ -21,9 +21,7 @@ export default class UpdateCourse extends Component {
       }
     
       componentDidMount(){
-          /**
-          * Fetches course data that needs to be updated
-          */
+          // Fetches course data that needs to be updated
           fetch(`http://localhost:5000/api/courses/${this.state.params.id}`)
               .then( response => response.json())
               .then( responseData => {
@@ -44,26 +42,20 @@ export default class UpdateCourse extends Component {
               })
       }
   
-    /**
-    * Handles the submit functionality for when user submits updated info.
-    * @param {event} Submit - when user submits updated info. 
-    */
+    // Handles the submit functionality for when user submits updated info.
     handleSubmit = (e) => {
       e.preventDefault();
       this.submit();
     }
-  
-    /**
-    * Handles the click functionality for when user hits cancel.
-    * @param {event} Click - when user clicks button to cancel. 
-    */
+    
+    // Handles the click functionality for cancel button.
     handleClick = e => {
       e.preventDefault();
       this.props.history.push(`/courses/${this.state.course_id}`);
     }
 
     render() {
-      //Checks if page exists
+      // Checks if page exists
       if (this.state.loaded) {
         if (!this.state.course_id) {
           window.location.replace('/notfound');
@@ -109,17 +101,17 @@ export default class UpdateCourse extends Component {
                 </ul>
               </div>
             </div>
-            <div className="grid-100 pad-bottom"><button className="button" type="submit">Update Course</button><button className="button button-secondary" onClick={this.handleClick}>Cancel</button></div>
+            <div className="grid-100 pad-bottom">
+              <button className="button" type="submit">Update Course</button>
+              <button className="button button-secondary" onClick={this.handleClick}>Cancel</button>
+            </div>
           </form>
         </div>
       </div>
     );
   }
 
-  /**
-  * Sets and changes state when user updates input fields.
-  * @param {event} change - input fields. 
-  */
+// Sets and changes state when user updates input fields.
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -131,9 +123,7 @@ export default class UpdateCourse extends Component {
     });
   }
 
-  /**
-  * Sends updated request and checks for errors
-  */
+// Sends updated request and checks for errors
   submit = () => {
     const { context } = this.props;
     const { title, description, estimatedTime, materialsNeeded, course_id} = this.state

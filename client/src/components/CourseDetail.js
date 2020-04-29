@@ -20,9 +20,7 @@ export default class CourseDetail extends Component {
     }
   
     componentDidMount(){
-        /**
-        * Fetches a specific course's data
-        */
+        // Fetches a specific course's data
         fetch(`http://localhost:5000/api/courses/${this.state.params.id}`)
             .then( response => response.json())
             .then( responseData => {
@@ -42,20 +40,15 @@ export default class CourseDetail extends Component {
 
     }
 
-    /**
-    * Checks whether user is authorized to update and/or delete course content
-    */
+    // Checks whether user is authorized to update and/or delete course content
     submit = () => {
         const { context } = this.props;
         const { email, password } = context.authenticatedUser;
-        console.log(this.state.params.id, "params")
-        console.log("auth ID", context.authenticatedUser.id )
-        console.log("course id", this.state.course.userId)
+    
         const path = `/courses/${this.state.params.id}`;
 
         if (context.authenticatedUser.id == this.state.course.userId) {
-        console.log("IF RUNNING")
-        console.log("email", email)
+ 
           context.data.deleteCourse(email, password, path )
           .then( errors => {
             if (errors.length) {
@@ -74,10 +67,7 @@ export default class CourseDetail extends Component {
         }
     }
 
-    /**
-    * Handles the submit functionality for deleting a course.
-    * @param {event} Submit - when user submits request to delete. 
-    */
+    // Handles the submit functionality for deleting a course.
     handleSubmit = (e) => {
         e.preventDefault();
         const confirmDelete = window.confirm("Are you sure you want to delete course?");
@@ -88,18 +78,14 @@ export default class CourseDetail extends Component {
 
     render() {
 
-        /**
-        * Checks if page exists
-        */
+        // Checks if page exists
         if (this.state.loaded) {
             if (!this.state.course.id) {
                 window.location.replace('/notfound')
             }
         }
 
-        /**
-        * Checks for authentication and renders the delete and update buttons
-        */
+        // Checks for authentication and renders the delete and update buttons
         const { errors } = this.state;
         let buttons;
 
@@ -108,7 +94,7 @@ export default class CourseDetail extends Component {
             if (this.props.context.authenticatedUser.id == this.state.course.userId) {
                 buttons = (           
                 <div className="grid-100"><span>
-                    <Link className="button" to={`/courses/${this.state.course.userId}/update`}>Update Course</Link>
+                    <Link className="button" to={`/courses/${this.state.params.id}/update`}>Update Course</Link>
                     <button onClick={this.handleSubmit} className="button" >Delete Course</button>
                    </span>
                     <Link className="button button-secondary" to="/">Return to List</Link></div>);

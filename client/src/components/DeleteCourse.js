@@ -2,7 +2,6 @@ import React from "react";
 import Cookies from "js-cookie";
 
 // Delete Course is a Component to Delete a Course, Only the User that Owns the Course should be allowed
-
 class DeleteCourse extends React.Component {
   constructor(props) {
     super(props);
@@ -34,7 +33,6 @@ class DeleteCourse extends React.Component {
   }
 
   //  handleDelete handles the Delete of the Course and Deals with any Errors
-
   handleDelete(event) {
     const { context } = this.props;
     const { email, password } = context.authenticatedUser;

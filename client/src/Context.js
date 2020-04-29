@@ -62,20 +62,20 @@ export class Provider extends Component {
     Cookies.remove("authenticatedUser");
   };
 
-  //method used to sign up a user, returns an errors array
+  // method used to sign up a user, returns an errors array
   signUp = async (userData) => {
     const response = await this.data('/users', 'POST', userData);
     if (response.status === 201) {
-        //returns empty errors array if user successfully created
+        // returns empty errors array if user successfully created
         return [];
     } else if (response.status === 400) {
-        //returns errors array if validation fails
+        // returns errors array if validation fails
         return response.json()
                 .then(responseData => {
                     return responseData.errors;
                 })
     } else if (response.status === 200) {
-        //returns errors array if user already exists
+        // returns errors array if user already exists
         return response.json()
             .then(responseData => {
                 return [ responseData.message ];
@@ -86,11 +86,11 @@ export class Provider extends Component {
 }
 
 
-//method used to retrieve all course data
+// method used to retrieve all course data
 getCourses = async () => {
   const response = await this.callApi(`/courses`, 'GET', null);
   if (response.status === 200) {
-      //returns all course data if successful
+      // returns all course data if successful
       return response.json()
           .then(responseData => responseData);
   } else {
@@ -101,12 +101,7 @@ getCourses = async () => {
 
 export const Consumer = Context.Consumer;
 
-/**
- * A higher-order component that wraps the provided component in a Context Consumer component.
- * @param {class} Component - A React component.
- * @returns {function} A higher-order component.
- */
-
+// A higher-order component that wraps the provided component in a Context Consumer component.
 export default function withContext(Component) {
   return function ContextComponent(props) {
     return (

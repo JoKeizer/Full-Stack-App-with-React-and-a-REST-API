@@ -1,6 +1,6 @@
 import config from './config';
 
-//Configs api requests and fetches data
+// Configs api requests and fetches data
 export default class Data {
   api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
     const url = config.apiBaseUrl + path;
@@ -24,16 +24,9 @@ export default class Data {
     return fetch(url, options);
   }
 
-  /**
-  * makes API request to obtain authenicated user data.
-  * @param {string} email - Provided input from user
-  * @param {string} password - Provided input from user
-  * @returns {string} User Data
-  */
+// makes API request to authenicated user data.
   async getUser(email, password, id) {
     const response = await this.api(`/users`, 'GET', null, true, {email, password, id});
-    console.log("getUser", email, password, id  )
-    console.log("response",response)
 
     if (response.status === 200) {
       return response.json().then(data => data);
@@ -46,10 +39,7 @@ export default class Data {
     }
   }
   
-  /**
-  * Sends POST API request to create user
-  * @param {object} user - User Data to be submitted
-  */
+// Sends POST API request to create user
   async createUser(user) {
     console.log(user, "post create user")
     const response = await this.api('/users', 'POST', user);
@@ -66,12 +56,7 @@ export default class Data {
     }
   }
 
-  /**
-  * Sends POST API request to create course
-  * @param {object} course - Course Data to be submitted
-  * @param {string } email - Provided input from user
-  * @param {string} course - Provided input from user
-  */
+// Sends POST API request to create course
   async createCourse (email, password, course,) {
   
     const response = await this.api('/courses', 'POST', course, true, {email, password});
@@ -88,14 +73,7 @@ export default class Data {
     }
   }
 
-  /**
-  * Sends PUT API request to uodate course
-  * @param {object} course - Course Data to be submitted
-  * @param {string} email - Provided input from user
-  * @param {string} password - Provided input from user
-  * @param {string} path - path of course that needs updated
-  */
- 
+// Sends PUT API request to uodate course 
   async updateCourse (email, password, course, path, ) {
     const response = await this.api(path, 'PUT', course, true, {email, password,});
     if (response.status === 204) {
@@ -111,12 +89,7 @@ export default class Data {
     }
   }
 
-  /**
-  * Sends DELETE API request to delete course
-  * @param {object} password - Provided input from user
-  * @param {string} email - Provided input from user
-  * @param {string} path - path of course that needs deleted
-  */
+// Sends DELETE API request to delete course
   async deleteCourse ( email, password, path) {
     const response = await this.api(path, 'DELETE', null, true, {email, password});
     if (response.status === 204) {
