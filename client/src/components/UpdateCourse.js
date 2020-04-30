@@ -14,7 +14,6 @@ export default class UpdateCourse extends Component {
           user: [],
           context: this.props.context,
           errors: [],
-          user: [],
           loaded: false
         };
         this.change = this.change.bind(this);
@@ -124,9 +123,8 @@ export default class UpdateCourse extends Component {
 
 // Sends updated request and checks for errors
   submit = () => {
-    console.log("running?????????")
     const { context } = this.props;
-    const { title, description, estimatedTime, materialsNeeded, course_id} = this.state
+    const { title, description, estimatedTime, materialsNeeded,} = this.state
     const { email, password } = context.authenticatedUser;
     const course = {
       title,
@@ -141,7 +139,6 @@ export default class UpdateCourse extends Component {
 
       context.data.updateCourse(email, password, course, path )
       .then( errors => {
-        console.log("then running")
         if (errors.length) {
             this.setState({errors});
           } else {

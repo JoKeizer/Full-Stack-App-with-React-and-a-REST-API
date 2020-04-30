@@ -113,23 +113,7 @@ export default class UserSignUp extends Component {
           errors: ["Password Does Not Match Confirm Password"]
         };
       });
-   
-    } else if(firstName === '' || lastName === ''){
-      this.setState(() => {
-        return {
-          errors: ["What is your name?"]
-        };
-      });
-    }  
-      else if(password === '') {
-          this.setState(() => {
-        return {
-          errors: ["Password can't be empty"]
-        };
-      });
-
     }else {
-    
     // To create a new user, call the createUser() method, which you can access via the destructured context variable. 
     // Context itself is an object which currently has only one property, data. Earlier, in Context.js, 
     // you passed Context.Provider a value prop whose value was an object with a data property. 

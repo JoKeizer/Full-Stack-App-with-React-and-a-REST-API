@@ -25,8 +25,6 @@ export default class CourseDetail extends Component {
             .then( response => response.json())
         
             .then( responseData => {
-                console.log("responseData",responseData)
-
                 this.setState({ 
                 course: responseData,
                 loaded: true,
@@ -92,7 +90,6 @@ export default class CourseDetail extends Component {
         if (this.props.context.authenticatedUser) {
 
             if (this.props.context.authenticatedUser.id == this.state.user.id) {
-                console.log("IF STATEMENT RUNNING")
                 buttons = (           
                 <div className="grid-100"><span>
                     <Link className="button" to={`/courses/${this.state.params.id}/update`}>Update Course</Link>

@@ -86,24 +86,29 @@ const authenticateUser = async (req, res, next) => {
 router.post('/', [
     check('firstName')
     .exists()
+    .not().isEmpty()
     .withMessage('Please provide a value for "firstName"'),
     check('lastName')
         .exists()
+        .not().isEmpty()
         .withMessage('Please provide a value for "lastName"'),
     check('emailAddress')
         .exists()
-        .withMessage('Please provide a value for "emailAddress"')
         .isEmail()
         .withMessage('Please provide a valid value for "emailAddress"'),
-    check('password')
+        check('password').isLength({ min: 5 }).withMessage('must be at least 6 chars long')
         .exists()
         .withMessage('Please provide a value for "password"'),
     ], async (req, res) => {
     try {
         const errors = validationResult(req);
+        console.log("running: ",errors)
 
         if (!errors.isEmpty()) {
             const errorMessages = errors.array().map(error => error.msg);
+            console.log("ERRORS RUNNING 400 ")
+            console.log(errorMessages)
+
             res.status(400).json({ errors: errorMessages });
         } else {
             const user = await req.body;

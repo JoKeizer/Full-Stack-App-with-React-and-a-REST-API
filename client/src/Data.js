@@ -41,7 +41,6 @@ export default class Data {
   
 // Sends POST API request to create user
   async createUser(user) {
-    console.log(user, "post create user")
     const response = await this.api('/users', 'POST', user);
     if (response.status === 201) {
       return [];
@@ -76,7 +75,6 @@ export default class Data {
 // Sends PUT API request to uodate course 
   async updateCourse (email, password, course, path, ) {
     const response = await this.api(path, 'PUT', course, true, {email, password,});
-    console.log("response", response)
     if (response.status === 204) {
       return [];
     }

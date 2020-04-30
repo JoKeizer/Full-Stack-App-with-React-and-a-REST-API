@@ -34,13 +34,9 @@ export class Provider extends Component {
   }
 
   signIn = async (email, password) => {
-    console.log("signup running?")
-
     const user = await this.data.getUser(email, password);
-    console.log("user sign in ", user)
 
     if (user !== null) {
-      console.log("user from signIn", user);
       const storedUser = Object.assign({}, user, { email, password});
       this.setState(() => {
         return { authenticatedUser: storedUser };
@@ -65,6 +61,7 @@ export class Provider extends Component {
   // method used to sign up a user, returns an errors array
   signUp = async (userData) => {
     const response = await this.data('/users', 'POST', userData);
+
     if (response.status === 201) {
         // returns empty errors array if user successfully created
         return [];

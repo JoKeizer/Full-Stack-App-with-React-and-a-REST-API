@@ -88,9 +88,6 @@ submit = () => {
     const { title, description, estimatedTime, materialsNeeded, context} = this.state;
     const { email, password} = context.authenticatedUser;
 
-    console.log('email', email)
-    console.log('title', title)
-
     const course = {
       title,
       description,
