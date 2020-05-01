@@ -124,7 +124,7 @@ export default class CourseDetail extends Component {
             <div className="course--header">
                 <h4 className="course--label">Course</h4>
                 <h3 className="course--title">{this.state.course.title}</h3>
-                <p>By {`${this.props.context.authenticatedUser.name}`}</p>
+                <p>By {`${this.state.course.userId}`}</p>
             </div>
             <div className="course--description">
                 <ReactMarkdown source={this.state.course.description} /> 
