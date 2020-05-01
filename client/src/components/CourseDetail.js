@@ -45,7 +45,7 @@ export default class CourseDetail extends Component {
     
         const path = `/courses/${this.state.params.id}`;
 
-        if (context.authenticatedUser.id == this.state.course.userId) {
+        if (context.authenticatedUser.id.toString() === this.state.course.userId.toString()) {
  
           context.data.deleteCourse(email, password, path )
           .then( errors => {
@@ -88,6 +88,8 @@ export default class CourseDetail extends Component {
         let buttons;
 
         if (this.props.context.authenticatedUser) {
+            console.log(this.props.context.authenticatedUser.id.toString())
+            // console.log(this.state.user.id.toString())
 
             if (this.props.context.authenticatedUser.id == this.state.user.id) {
                 buttons = (           
@@ -122,7 +124,7 @@ export default class CourseDetail extends Component {
             <div className="course--header">
                 <h4 className="course--label">Course</h4>
                 <h3 className="course--title">{this.state.course.title}</h3>
-                <p>By {`${this.state.course.userId}`}</p>
+                <p>By {`${this.props.context.authenticatedUser.name}`}</p>
             </div>
             <div className="course--description">
                 <ReactMarkdown source={this.state.course.description} /> 

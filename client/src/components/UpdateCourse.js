@@ -135,7 +135,7 @@ export default class UpdateCourse extends Component {
     }
     const path = `/courses/${this.state.course_id}`;
 
-    if (context.authenticatedUser.id == this.state.user.id) {
+    if (context.authenticatedUser.id.toString() === this.state.user.id.toString()) {
 
       context.data.updateCourse(email, password, course, path )
       .then( errors => {
