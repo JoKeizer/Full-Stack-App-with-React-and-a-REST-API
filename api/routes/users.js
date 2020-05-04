@@ -72,7 +72,6 @@ const authenticateUser = async (req, res, next) => {
   router.get('/',  authenticateUser, asyncHandler(async (req, res) => {
       const user = req.currentUser;
       const firstName = user.firstName
-      console.log(firstName)
       
     res.status(200).json({
         name: `${user.firstName} ${user.lastName}`,

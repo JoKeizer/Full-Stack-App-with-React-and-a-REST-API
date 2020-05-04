@@ -93,9 +93,11 @@ router.get('/:id', asyncHandler (async(req, res) => {
 router.post("/",[
     check('title')
         .exists()
+        .not().isEmpty()
         .withMessage('Title is required'),
     check('description')
         .exists()
+        .not().isEmpty()
         .withMessage('Description is required'),
     check("userId")
     .exists()
@@ -136,9 +138,11 @@ router.post("/",[
 router.put('/:id', [
     check('title')
         .exists()
+        .not().isEmpty()
         .withMessage('Title is required'),
     check('description')
         .exists()
+        .not().isEmpty()
         .withMessage('Description is required'),
     check("userId")
     .exists()
